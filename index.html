@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Conheça os planos de acompanhamento online, orientação sobre treinos e educação alimentar.">
+  <title>Planos de Acompanhamento | Personal Online</title>
+  <style>
+    :root {
+      --bg: #0b0b0d;
+      --surface: #141417;
+      --surface-2: #1b1b20;
+      --text: #f5f5f6;
+      --muted: #aaaab2;
+      --red: #ed1c2e;
+      --line: rgba(255,255,255,.11);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(11,11,13,.88); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .brand span { color: var(--red); }
+    .nav a:last-child { color: var(--muted); font-size: .94rem; }
+    .hero { padding: 88px 0 68px; text-align: center; }
+    .eyebrow { color: var(--red); text-transform: uppercase; letter-spacing: .22em; font-size: .76rem; font-weight: 800; }
+    h1 { max-width: 850px; margin: 18px auto; font-size: clamp(2.5rem, 7vw, 5.3rem); line-height: .98; letter-spacing: -.055em; }
+    h1 span { color: var(--red); }
+    .hero p { max-width: 650px; margin: 22px auto 30px; color: var(--muted); font-size: 1.08rem; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 23px; border-radius: 999px; background: var(--red);
+      color: white; font-weight: 800; border: 1px solid var(--red);
+      transition: transform .2s, background .2s;
+    }
+    .button:hover { transform: translateY(-2px); background: #c91425; }
+    .button.secondary { background: transparent; border-color: var(--line); }
+    section { padding: 62px 0; }
+    .section-head { text-align: center; margin-bottom: 34px; }
+    .section-head h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); margin: 8px 0; letter-spacing: -.04em; }
+    .section-head p { color: var(--muted); max-width: 650px; margin: 0 auto; }
+    .plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
+    .plan {
+      background: linear-gradient(160deg, var(--surface-2), var(--surface));
+      border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 24px 20px; display: flex; flex-direction: column;
+    }
+    .plan.featured { border-color: rgba(237,28,46,.8); box-shadow: 0 0 0 1px rgba(237,28,46,.15); }
+    .plan-label { color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .15em; font-weight: 800; }
+    .plan h3 { font-size: 1.45rem; margin: 5px 0 14px; }
+    .price { font-size: 2.25rem; line-height: 1.1; font-weight: 900; letter-spacing: -.05em; }
+    .period { color: var(--muted); font-size: .9rem; margin: 3px 0 20px; }
+    .plan ul { list-style: none; padding: 0; margin: 0 0 24px; flex: 1; }
+    .plan li { color: #d7d7dc; font-size: .93rem; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .plan li::before { content: "✓"; color: var(--red); font-weight: 900; margin-right: 9px; }
+    .plan .button { width: 100%; padding: 12px 14px; font-size: .9rem; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .step { padding: 25px; border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); }
+    .number { width: 36px; height: 36px; display: grid; place-items: center; background: rgba(237,28,46,.13); color: var(--red); border-radius: 50%; font-weight: 900; }
+    .step h3 { margin: 14px 0 6px; }
+    .step p { color: var(--muted); margin: 0; }
+    .about {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;
+      padding: 34px; border: 1px solid var(--line); border-radius: 24px;
+      background: radial-gradient(circle at 100% 0, rgba(237,28,46,.13), transparent 42%), var(--surface);
+    }
+    .about h2 { font-size: 2rem; line-height: 1.1; margin: 8px 0 14px; }
+    .about p { color: var(--muted); }
+    .about-list { display: grid; gap: 12px; }
+    .about-list div { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.025); }
+    .notice { color: #aaaab2; font-size: .83rem; border-left: 3px solid var(--red); padding: 12px 15px; background: rgba(255,255,255,.035); border-radius: 0 10px 10px 0; }
+    .cta { text-align: center; padding: 66px 20px; border-radius: 24px; background: linear-gradient(135deg, #19191e, #101013); border: 1px solid var(--line); }
+    .cta h2 { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 10px; }
+    .cta p { color: var(--muted); margin: 0 auto 24px; max-width: 580px; }
+    footer { padding: 28px 0; margin-top: 60px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; text-align: center; }
+    @media (max-width: 950px) { .plans { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 28px, 520px); }
+      .hero { padding: 66px 0 48px; }
+      .plans, .steps, .about { grid-template-columns: 1fr; }
+      .about { padding: 23px; }
+      section { padding: 46px 0; }
+      .nav { min-height: 62px; }
+      .nav a:last-child { font-size: .82rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#inicio">SEU <span>PROJETO</span></a>
+      <a href="#planos">Ver planos ↓</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="eyebrow">Acompanhamento online</div>
+        <h1>Seu objetivo merece um <span>plano.</span></h1>
+        <p>Orientação, organização e conhecimento para você entender melhor seus treinos, desenvolver hábitos consistentes e evoluir com responsabilidade.</p>
+        <a class="button" href="https://wa.me/5565981226604?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20os%20planos%20de%20acompanhamento." target="_blank" rel="noopener">Falar pelo WhatsApp <span>↗</span></a>
+      </div>
+    </section>
+
+    <section id="planos">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Escolha seu acompanhamento</div>
+          <h2>Planos e valores</h2>
+          <p>Encontre a opção que combina com o nível de acompanhamento que você procura.</p>
+        </div>
+        <div class="plans">
+          <article class="plan">
+            <div class="plan-label">Plano 01</div><h3>Diário</h3>
+            <div class="price">R$ 20</div><div class="period">por dia</div>
+            <ul>
+              <li>Orientação online sobre os treinos</li>
+              <li>Conversa sobre sua rotina alimentar</li>
+              <li>Ajuda para entender melhor seus hábitos</li>
+              <li>Espaço para tirar dúvidas</li>
+            </ul>
+            <a class="button secondary" href="https://wa.me/5565981226604?text=Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20di%C3%A1rio." target="_blank" rel="noopener">Escolher plano</a>
+          </article>
+
+          <article class="plan">
+            <div class="plan-label">Plano 02</div><h3>Semanal</h3>
+            <div class="price">R$ 50</div><div class="period">por semana</div>
+            <ul>
+              <li>Tudo do plano diário</li>
+              <li>Educação alimentar: carboidratos, proteínas e gorduras</li>
+              <li>Orientações e lembretes sobre a rotina de treino</li>
+              <li>Organização de uma rotina de exercícios</li>
+            </ul>
+            <a class="button secondary" href="https://wa.me/5565981226604?text=Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20semanal." target="_blank" rel="noopener">Escolher plano</a>
+          </article>
+
+          <article class="plan featured">
+            <div class="plan-label">Plano 03</div><h3>Mensal</h3>
+            <div class="price">R$ 150</div><div class="period">por mês</div>
+            <ul>
+              <li>Tudo do plano semanal</li>
+              <li>Aprenda os princípios básicos do treinamento</li>
+              <li>Entenda divisão muscular, volume e recuperação</li>
+              <li>Aprenda a estruturar seus treinos com mais autonomia</li>
+            </ul>
+            <a class="button" href="https://wa.me/5565981226604?text=Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20mensal." target="_blank" rel="noopener">Escolher plano</a>
+          </article>
+
+          <article class="plan">
+            <div class="plan-label">Plano 04</div><h3>Anual</h3>
+            <div class="price">R$ 1.600</div><div class="period">por ano</div>
+            <ul>
+              <li>Tudo dos planos anteriores</li>
+              <li>Acompanhamento contínuo ao longo do ano</li>
+              <li>Mais aprofundamento sobre treinamento</li>
+              <li>Suporte para desenvolver autonomia e consistência</li>
+            </ul>
+            <a class="button secondary" href="https://wa.me/5565981226604?text=Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20anual." target="_blank" rel="noopener">Escolher plano</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Simples e direto</div>
+          <h2>Como funciona?</h2>
+          <p>O acompanhamento começa com uma conversa para entender seus objetivos e sua rotina.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><div class="number">1</div><h3>Entre em contato</h3><p>Chame pelo WhatsApp e escolha o plano que deseja conhecer.</p></article>
+          <article class="step"><div class="number">2</div><h3>Converse sobre seus objetivos</h3><p>Conte sua experiência, sua disponibilidade e o que pretende aprender.</p></article>
+          <article class="step"><div class="number">3</div><h3>Comece sua jornada</h3><p>Receba orientações educativas e acompanhe sua evolução de forma organizada.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="about">
+          <div>
+            <div class="eyebrow">Mais conhecimento, mais autonomia</div>
+            <h2>Aprenda a entender seu próprio treinamento.</h2>
+            <p>A proposta é compartilhar conhecimento sobre exercícios, organização de rotina e fundamentos da alimentação, para que você compreenda melhor suas escolhas e construa hábitos sustentáveis.</p>
+            <a class="button" href="https://wa.me/5565981226604?text=Ol%C3%A1!%20Quero%20conversar%20sobre%20o%20acompanhamento." target="_blank" rel="noopener">Tirar dúvidas no WhatsApp</a>
+          </div>
+          <div class="about-list">
+            <div><strong>Treinamento</strong><br><span style="color:var(--muted)">Conceitos, organização e execução consciente.</span></div>
+            <div><strong>Educação alimentar</strong><br><span style="color:var(--muted)">Entenda a função dos nutrientes e hábitos equilibrados.</span></div>
+            <div><strong>Autonomia</strong><br><span style="color:var(--muted)">Conhecimento para tomar decisões mais conscientes.</span></div>
+          </div>
+        </div>
+        <p class="notice" style="margin-top:18px">Aviso: este acompanhamento tem caráter educativo e não substitui avaliação ou prescrição individual feita por profissional de Educação Física ou nutricionista habilitado. Orientações de treino e alimentação devem respeitar a idade, as condições e as necessidades de cada pessoa. Não há promessa de resultados específicos.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta">
+          <div class="eyebrow">Vamos conversar?</div>
+          <h2>O próximo passo começa com uma conversa.</h2>
+          <p>Fale comigo, tire suas dúvidas e conheça melhor os planos de acompanhamento.</p>
+          <a class="button" href="https://wa.me/5565981226604?text=Ol%C3%A1!%20Quero%20conhecer%20os%20planos%20de%20acompanhamento." target="_blank" rel="noopener">Chamar no WhatsApp ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 • Acompanhamento online • Todos os direitos reservados</div>
+  </footer>
+</body>
+</html>
